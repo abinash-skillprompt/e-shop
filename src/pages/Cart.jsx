@@ -18,7 +18,7 @@ const Cart = () => {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
           <BsShopWindow className="h-8 w-8 md:h-10 md:w-10 text-gray-700" />
           <h2 className="text-2xl md:text-3xl font-semibold tracking-wide mt-2 text-gray-700">
-            E-Shop
+            Cart
           </h2>
         </div>
       </div>

@@ -47,7 +47,7 @@ const ProductCard = () => {
     return <div>Data </div>;
   }
   return (
-    <div className="bg-gray-200 w-[250px] h-[300px] p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+    <div className="bg-[F8F8F8] w-[250px] h-[300px] p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
       {/* Image Container */}
       <div className="w-full h-48 flex items-center justify-center overflow-hidden rounded-lg mb-4">
         <img

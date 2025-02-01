@@ -2,6 +2,7 @@ import NavBar from '../components/NavBar';
 import backgroundImage from '../assets/images/backgroundImage.png';
 import { BsShopWindow } from 'react-icons/bs';
 import ProductCard from '../components/ProductCard';
+import BenefitsSection from '../components/BenefitsSection';
 
 const Home = () => {
   return (
@@ -30,6 +31,9 @@ const Home = () => {
           <ProductCard key={index} />
         ))}
       </div>
+
+      {/* {Benefits Section} */}
+      <BenefitsSection />
     </div>
   );
 };
