@@ -1,6 +1,6 @@
 const BenefitsSection = () => {
   return (
-    <div className="bg-gray-50 py-16 px-6 flex items-center">
+    <div className="bg-[#F4F4F4] py-16 px-6 flex items-center">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-40 text-left">
         {/* Free Delivery */}
         <div className="space-y-2">
@@ -30,7 +30,7 @@ const BenefitsSection = () => {
           </h3>
           <p className="text-gray-400 text-base">
             Your financial information remains private and never shared with
-            third parties..
+            third parties.
           </p>
         </div>
       </div>
