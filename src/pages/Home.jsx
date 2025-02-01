@@ -3,6 +3,7 @@ import backgroundImage from '../assets/images/backgroundImage.png';
 import { BsShopWindow } from 'react-icons/bs';
 import ProductCard from '../components/ProductCard';
 import BenefitsSection from '../components/BenefitsSection';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (
@@ -34,6 +35,9 @@ const Home = () => {
 
       {/* {Benefits Section} */}
       <BenefitsSection />
+
+      {/* {Footer Section} */}
+      <Footer />
     </div>
   );
 };
