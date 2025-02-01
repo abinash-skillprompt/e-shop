@@ -2,7 +2,7 @@ import { BsShopWindow } from 'react-icons/bs';
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-800 py-10 px-6">
+    <footer className="bg-white text-gray-800 py-10 px-6 mx-5">
       <div className="max-w-7xl mx-auto">
         {/* Main Container */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">

@@ -1,7 +1,7 @@
 const BenefitsSection = () => {
   return (
     <div className="bg-[#F4F4F4] py-16 px-6 flex items-center">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-40 text-left">
+      <div className="max-w-7xl mx-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-50 text-left">
         {/* Free Delivery */}
         <div className="space-y-2">
           <h3 className="text-2xl font-semibold text-gray-900">
