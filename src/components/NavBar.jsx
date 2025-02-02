@@ -2,8 +2,12 @@ import { BsShopWindow } from 'react-icons/bs';
 import { FaUserLarge } from 'react-icons/fa6';
 import { PiShoppingCartBold } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
+import useCartStore from '../store/useCartStore';
 
 const NavBar = () => {
+  const cart = useCartStore((state) => state.cart);
+
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
   return (
     <nav className="flex flex-wrap justify-between items-center h-16 bg-white font-poppins px-4 md:px-12">
       {/* Logo */}
@@ -35,8 +39,14 @@ const NavBar = () => {
           <FaUserLarge className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer" />
         </NavLink>
 
-        <NavLink to="/cart">
+        <NavLink to="/cart" className="relative">
           <PiShoppingCartBold className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer" />
+          {/* Display the number of items in the cart */}
+          {totalItems > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {totalItems}
+            </span>
+          )}
         </NavLink>
       </div>
     </nav>

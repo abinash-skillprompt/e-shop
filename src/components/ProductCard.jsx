@@ -1,7 +1,8 @@
-// import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import PropTypes from 'prop-types';
-// import { IoMdAdd } from 'react-icons/io';
-// import { RxCross2, RxUpdate } from 'react-icons/rx';
+import PropTypes from 'prop-types';
+import { IoMdAdd } from 'react-icons/io';
+import { RxCross2, RxUpdate } from 'react-icons/rx';
+import useHandleUpdate from '../apis/useHandleUpdate';
+import useCartStore from '../store/useCartStore';
 
 // const ProductCard = ({ product, onDelete }) => {
 //   // const queryClient = useQueryClient();
@@ -65,30 +66,22 @@
 //   );
 // };
 
-// ProductCard.propTypes = {
-//   product: PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//     title: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     image: PropTypes.string.isRequired,
-//     description: PropTypes.string.isRequired,
-//   }).isRequired,
-//   onDelete: PropTypes.func.isRequired,
-// };
-
-// export default ProductCard;
-
-import PropTypes from 'prop-types';
-import { IoMdAdd } from 'react-icons/io';
-import { RxCross2, RxUpdate } from 'react-icons/rx';
-import useHandleUpdate from '../apis/useHandleUpdate';
-
 const ProductCard = ({ product, onDelete }) => {
   const handleUpdate = useHandleUpdate();
+
+  const addToCart = useCartStore((state) => state.addToCart); // Get the addToCart function from the store
+
   const onUpdateClick = () => {
-    // Just call the update mutation with the existing product
+    // calling the update mutation with the existing product
     handleUpdate(product);
   };
+
+  const handleAddToCart = () => {
+    // Add the product to the cart
+    addToCart(product);
+    alert('Product added to cart!');
+  };
+
   return (
     <div className="w-[250px] h-[300px] p-4 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col">
       {/* Image Container */}
@@ -105,14 +98,14 @@ const ProductCard = ({ product, onDelete }) => {
       <div className="flex items-center justify-between pt-1">
         <p className="text-md text-gray-600">$ {product.price}</p>
         <div className="flex items-center gap-1 justify-center">
-          <button>
-            <IoMdAdd className="w-5 h-5 cursor-pointer" />
+          <button onClick={handleAddToCart}>
+            <IoMdAdd className="w-5 h-5 cursor-pointer hover:text-blue-500 transition-all duration-150" />
           </button>
           <button onClick={() => onDelete(product.id)}>
-            <RxCross2 className="text-red-500 w-5 h-5 cursor-pointer" />
+            <RxCross2 className="text-red-400 hover:text-red-800 transition-all duration-150 w-5 h-5 cursor-pointer" />
           </button>
           <button onClick={onUpdateClick}>
-            <RxUpdate className="w-4 h-4 cursor-pointer" />
+            <RxUpdate className="w-4 h-4 cursor-pointer  hover:text-green-500 transition-all duration-150" />
           </button>
         </div>
       </div>
