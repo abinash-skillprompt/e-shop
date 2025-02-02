@@ -1,66 +1,134 @@
-import { useQuery } from '@tanstack/react-query';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import PropTypes from 'prop-types';
+// import { IoMdAdd } from 'react-icons/io';
+// import { RxCross2, RxUpdate } from 'react-icons/rx';
 
-const ProductCard = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryFn: async () => {
-      try {
-        const dataFetch = await fetch('https://fakestoreapi.com/products');
+// const ProductCard = ({ product, onDelete }) => {
+//   // const queryClient = useQueryClient();
 
-        if (dataFetch.ok) {
-          const jsonData = await dataFetch.json();
+//   const deleteMutation = useMutation({
+//     mutationFn: async () => {
+//       const response = await fetch(
+//         `https://fakestoreapi.com/products/${product.id}`,
+//         {
+//           method: 'DELETE',
+//         }
+//       );
+//       if (!response.ok) {
+//         throw new Error('Failed to delete product');
+//       }
+//       return response.json();
+//     },
+//     onSuccess: () => {
+//       // No need to refetch; the product is already removed from UI
+//       console.log('Product deleted successfully');
+//       alert('Product deleted successfully');
+//     },
+//   });
 
-          return jsonData;
-        } else {
-          throw new Error('Failed to fetch data');
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
+//   const handleDelete = () => {
+//     // Immediately remove product from UI
+//     onDelete(product.id);
 
-    queryKey: ['getProducts'],
-  });
+//     // Send API call to delete the product
+//     deleteMutation.mutate();
+//   };
 
-  // Check if loading
+//   return (
+//     <div className=" w-[250px] h-[300px] p-4 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col">
+//       {/* Image Container */}
+//       <div className="w-full h-48 flex items-center justify-center overflow-hidden rounded-lg mb-4">
+//         <img
+//           src={product.image}
+//           alt={product.description}
+//           className="w-full h-full object-contain "
+//         />
+//       </div>
+//       {/* Product Details */}
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[100vh]">
-        Loading...
-      </div>
-    );
-  }
+//       <p className="text-lg font-semibold text-gray-800">{product.title}</p>
+//       <div className="flex items-center justify-between pt-1">
+//         <p className="text-md text-gray-600">$ {product.price}</p>
+//         <div className="flex items-center gap-1 justify-center ">
+//           <button>
+//             <IoMdAdd className="w-5 h-5 cursor-pointer" />
+//           </button>
+//           <button onClick={handleDelete}>
+//             <RxCross2 className="text-red-500 w-5 h-5 cursor-pointer" />
+//           </button>
+//           <button>
+//             <RxUpdate className="w-4 h-4 cursor-pointer" />
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-  // Check if error
+// ProductCard.propTypes = {
+//   product: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     title: PropTypes.string.isRequired,
+//     price: PropTypes.number.isRequired,
+//     image: PropTypes.string.isRequired,
+//     description: PropTypes.string.isRequired,
+//   }).isRequired,
+//   onDelete: PropTypes.func.isRequired,
+// };
 
-  if (isError) {
-    console.log('Error while fetching data');
+// export default ProductCard;
 
-    return <div>Error fetching data</div>;
-  }
+import PropTypes from 'prop-types';
+import { IoMdAdd } from 'react-icons/io';
+import { RxCross2, RxUpdate } from 'react-icons/rx';
+import useHandleUpdate from '../apis/useHandleUpdate';
 
-  // Check if data is undefined or null
-
-  if (!data) {
-    console.log('Data is undefined or null');
-
-    return <div>Data </div>;
-  }
+const ProductCard = ({ product, onDelete }) => {
+  const handleUpdate = useHandleUpdate();
+  const onUpdateClick = () => {
+    // Just call the update mutation with the existing product
+    handleUpdate(product);
+  };
   return (
-    <div className="bg-[F8F8F8] w-[250px] h-[300px] p-4 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+    <div className="w-[250px] h-[300px] p-4 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col">
       {/* Image Container */}
       <div className="w-full h-48 flex items-center justify-center overflow-hidden rounded-lg mb-4">
         <img
-          src="https://static.vecteezy.com/system/resources/previews/011/794/199/non_2x/fabric-armchair-soft-cushion-with-metal-leg-3d-rendering-modern-interior-design-for-living-room-free-png.png"
-          alt="chair"
+          src={product.image}
+          alt={product.description}
           className="w-full h-full object-contain"
         />
       </div>
+
       {/* Product Details */}
-      <p className="text-lg font-semibold text-gray-800">Chair</p>
-      <p className="text-md text-gray-600">Rs. 25,000</p>
+      <p className="text-lg font-semibold text-gray-800">{product.title}</p>
+      <div className="flex items-center justify-between pt-1">
+        <p className="text-md text-gray-600">$ {product.price}</p>
+        <div className="flex items-center gap-1 justify-center">
+          <button>
+            <IoMdAdd className="w-5 h-5 cursor-pointer" />
+          </button>
+          <button onClick={() => onDelete(product.id)}>
+            <RxCross2 className="text-red-500 w-5 h-5 cursor-pointer" />
+          </button>
+          <button onClick={onUpdateClick}>
+            <RxUpdate className="w-4 h-4 cursor-pointer" />
+          </button>
+        </div>
+      </div>
     </div>
   );
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

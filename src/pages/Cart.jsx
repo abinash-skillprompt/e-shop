@@ -33,14 +33,14 @@ const Cart = () => {
         <span className="font-bold text-lg">Quantity</span>
         <span className="font-bold text-lg">Subtotal</span>
       </div> */}
-      <div className="grid grid-cols-3 gap-4 items-center bg-[#F4F4F4] pb-2 mb-4 mx-10">
+      <div className="grid grid-cols-3 gap-4 items-center bg-[#F4F4F4] pb-2 mb-4 mx-10 px-1">
         <span className="font-bold text-lg text-left">Product</span>
         <span className="font-bold text-lg text-center">Quantity</span>
         <span className="font-bold text-lg text-right">Subtotal</span>
       </div>
 
       {/* Product in Cart */}
-      <div className="grid grid-cols-3 gap-4 items-center border-b border-black py-4 mx-10">
+      <div className="grid grid-cols-3 gap-4 items-center border-b border-black py-4 mx-10 px-1">
         <div className="flex items-center space-x-4">
           <img
             src="https://static.vecteezy.com/system/resources/previews/011/794/199/non_2x/fabric-armchair-soft-cushion-with-metal-leg-3d-rendering-modern-interior-design-for-living-room-free-png.png"
@@ -60,7 +60,7 @@ const Cart = () => {
         <span className="font-medium text-right">Rs. 25,000</span>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 items-center border-b border-black py-4 mx-10">
+      <div className="grid grid-cols-3 gap-4 items-center border-b border-black py-4 mx-10 px-1">
         <div className="flex items-center space-x-4">
           <img
             src="https://static.vecteezy.com/system/resources/previews/011/794/199/non_2x/fabric-armchair-soft-cushion-with-metal-leg-3d-rendering-modern-interior-design-for-living-room-free-png.png"
